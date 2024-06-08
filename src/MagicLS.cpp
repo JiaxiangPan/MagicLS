@@ -24,5 +24,7 @@
  */
 
 #include "store.hpp"
+#include "commands/abc/rewrite.hpp"
+#include "commands/abc/read.hpp"
 
 ALICE_MAIN(MagicLS)
