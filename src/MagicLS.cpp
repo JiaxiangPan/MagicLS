@@ -26,5 +26,12 @@
 #include "store.hpp"
 #include "commands/abc/rewrite.hpp"
 #include "commands/abc/read.hpp"
+#include "commands/adder.hpp"
+#include "commands/subtractor.hpp"
+#include "commands/multiplier.hpp"
+#include "commands/divider.hpp"
+#include "commands/abc/balance.hpp"
+#include "commands/exprsim.hpp"
+#include "commands/abc/refactor.hpp"
 
 ALICE_MAIN(MagicLS)
