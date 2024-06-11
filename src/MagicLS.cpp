@@ -33,5 +33,9 @@
 #include "commands/abc/balance.hpp"
 #include "commands/exprsim.hpp"
 #include "commands/abc/refactor.hpp"
+#include "commands/abc/resub.hpp"
+#include "commands/abc/map.hpp"
+#include "commands/abc/dc2.hpp"
+#include "commands/abc/ifraig.hpp"
 
 ALICE_MAIN(MagicLS)
