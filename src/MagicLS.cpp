@@ -37,5 +37,10 @@
 #include "commands/abc/map.hpp"
 #include "commands/abc/dc2.hpp"
 #include "commands/abc/ifraig.hpp"
+#include "commands/abc/dch.hpp"
+#include "commands/abc/write.hpp"
+#include "commands/abc/read_genlib.hpp"
+#include "commands/abc/strash.hpp"
+
 
 ALICE_MAIN(MagicLS)
