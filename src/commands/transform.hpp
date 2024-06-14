@@ -19,8 +19,8 @@
 #include <string>
 
 #include <mockturtle/networks/aig.hpp>
-#include <mockturtle/networks/gia.hpp>
-#include <mockturtle/utils/abc.hpp>
+#include "../core/abc_gia.hpp"
+#include "../core/abc.hpp"
 
 using namespace std;
 using namespace mockturtle;

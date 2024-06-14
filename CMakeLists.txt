@@ -5,7 +5,6 @@ project("MagicLS" LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-SET(ENABLE_ABC ON)# to compile the code(abc.c gia.hpp explorer.hpp) in lib/mockturtle
 
 if(UNIX)
     # some specific compiler definitions
