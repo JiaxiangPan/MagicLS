@@ -643,10 +643,14 @@ ALICE_CONVERT(klut_network, element, pabc::Abc_Ntk_t *) {
 ALICE_ADD_STORE(pabc::Gia_Man_t *, "gia", "i", "GIA", "GIAs")
 
 ALICE_DESCRIBE_STORE(pabc::Gia_Man_t *, gia) {
-  const auto name = pabc::Gia_ManName(gia);
+  // const auto name = pabc::Gia_ManName(gia);
+  //When using `aig_to_gia`, the generated GIA network does not contain `Gia_ManName` information, hence it is disabled.
   const auto pi_num = pabc::Gia_ManPiNum(gia);
   const auto po_num = pabc::Gia_ManPoNum(gia);
-  return fmt::format("{}   i/o = {}/{}", name, pi_num, po_num);
+  const auto gates_num = pabc::Gia_ManAndNum(gia);
+  const auto level = pabc::Gia_ManLevelNum(gia);
+  // return fmt::format("{}   i/o = {}/{}", name, pi_num, po_num);
+  return fmt::format("[GIA]   i/o = {}/{}  nodes = {}  level = {}", pi_num, po_num, gates_num, level);
 }
 
 ALICE_PRINT_STORE(pabc::Gia_Man_t *, os, gia) {
