@@ -41,6 +41,8 @@
 #include "commands/abc/write.hpp"
 #include "commands/abc/read_genlib.hpp"
 #include "commands/abc/strash.hpp"
-
+#include "commands/transform.hpp"
+#include "commands/abc/&fraig.hpp"
+#include "commands/abc/gia_opt.hpp"
 
 ALICE_MAIN(MagicLS)
