@@ -8,4 +8,8 @@ Compiled successfully with Clang 6.0.1, Clang 12.0.0, GCC 7.3.0, and GCC 8.2.0.
 
 ## How to Compile
 ```bash
+mkdir build
+cd build
+cmake ..
+make
 ```
