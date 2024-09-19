@@ -97,7 +97,7 @@ namespace alice
                 }
                 
                 store<pabc::Abc_Ntk_t *>().extend();
-                store<pabc::Abc_Ntk_t *>().current() == pNtkRes;
+                store<pabc::Abc_Ntk_t *>().current() = pNtkRes;
             }
 
             end = clock();
