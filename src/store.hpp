@@ -45,6 +45,10 @@
 #include <mockturtle/views/names_view.hpp>
 
 #include "./core/abc2mockturtle.hpp"
+#include "./core/abc_api.hpp"
+#include "./core/abc_gia.hpp"
+#include "./core/abc.hpp"
+
 #include <mockturtle/algorithms/node_resynthesis.hpp>
 
 using namespace mockturtle;
@@ -679,6 +683,26 @@ ALICE_READ_FILE(pabc::Gia_Man_t *, gia, filename, cmd) {
 
 ALICE_WRITE_FILE(pabc::Gia_Man_t *, gia, gia, filename, cmd) {
   pabc::Gia_AigerWrite(gia, (char *)filename.c_str(), 1, 0, 0);
+}
+
+/* gia */
+//ALICE_ADD_STORE(gia_network, "gia", "q", "gia", "GIA")
+
+ALICE_CONVERT(aig_network, element, pabc::Gia_Man_t *) {
+  aig_network aig = element;
+  gia_network gia(aig.size() << 1);
+  aig_to_gia(gia, aig);
+  pabc::Gia_Man_t * GIA = const_cast<pabc::Gia_Man_t*>(gia.get_gia());
+
+  return GIA;
+}
+ALICE_CONVERT(pabc::Gia_Man_t *, element, aig_network) {
+  pabc::Gia_Man_t * gia_ = element;
+  aig_network aig;
+  gia_network gia(gia_);
+  gia_to_aig(aig, gia);
+
+  return aig;
 }
 
 }  // namespace alice
