@@ -19,7 +19,6 @@
 #include <string>
 
 #include <mockturtle/networks/aig.hpp>
-#include "../core/abc_gia.hpp"
 #include "../core/abc.hpp"
 
 using namespace std;
@@ -27,15 +26,15 @@ using namespace mockturtle;
 
 namespace alice
 {
-    class transform_command : public command
+    class abc_command : public command
     {
     public:
-        explicit transform_command(const environment::ptr &env)
+        explicit abc_command(const environment::ptr &env)
             : command(env, "transform network between AIG and GIA")
         {
             add_flag("--aig2gia, -a", "convert aig to gia");
             add_flag("--gia2aig, -g", "convert gia to aig");
-            add_option("-s, --string", script, "set the opt string in ABC9 [default = &ps]");
+            add_option("-s, --string", script, "Set the string of the optimization command in ABC9 [default = &ps]");
         }
 
     protected:
@@ -57,7 +56,7 @@ namespace alice
                 fmt::print(" After [GIA] PI/PO = {}/{}  nodes = {}  level = {}\n ", gia.num_pis(), gia.num_pos(), gia.num_gates(), gia.num_levels());
 
                 store<pabc::Gia_Man_t *>().extend();
-                store<pabc::Gia_Man_t *>().current() = gia.get_gia();
+                store<pabc::Gia_Man_t *>().current() = const_cast<pabc::Gia_Man_t*>(gia.get_gia());
             }
             else if(is_set("gia2aig"))
             {
@@ -75,6 +74,19 @@ namespace alice
                 store<mockturtle::aig_network>().extend();
                 store<mockturtle::aig_network>().current() = aig;
             }
+            else if(is_set("string") )
+            {
+                if(store<pabc::Gia_Man_t *>().size() == 0)
+                {
+                    std::cerr << "NO GIA\n";
+                    return;
+                }
+                mockturtle::gia_network gia = store<pabc::Gia_Man_t *>().current();
+                gia.run_opt_script(script);//函数中包含的pabc::Gia_ManStop(gia_);会导致store出问题
+                fmt::print(" After Run ABC9 command: {} [GIA] PI/PO = {}/{}  nodes = {}  level = {}\n ", script, gia.num_pis(), gia.num_pos(), gia.num_gates(), gia.num_levels());
+                store<pabc::Gia_Man_t *>().extend();
+                store<pabc::Gia_Man_t *>().current() = const_cast<pabc::Gia_Man_t*>(gia.get_gia());
+            }
             else 
             {
                 std::cerr << "no this flag\n";
@@ -86,7 +98,7 @@ namespace alice
         std::string script = "&ps";//default &ps
     };
 
-    ALICE_ADD_COMMAND(transform, "General")
+    ALICE_ADD_COMMAND(abc, "General")
 
 } // namespace alice
 

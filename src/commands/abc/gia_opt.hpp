@@ -55,6 +55,13 @@ namespace alice
                 printf("syntax error in script\n");
                 }
                 pabc::Gia_Man_t * new_gia = pabc::Abc_FrameGetGia(abc);
+                // fmt::print(" After Run ABC9 command: {} [GIA] PI/PO = {}/{}  nodes = {}  level = {}\n ", script, pabc::Gia_ManPiNum(new_gia), pabc::Gia_ManPoNum(new_gia), Gia_ManAndNum(new_gia), pabc::Gia_ManLevelNum(new_gia));
+                fmt::print(" After Run ABC9 command: {} [GIA] PI/PO = {}/{}  nodes = {}  level = {}\n ",
+                    script, 
+                    pabc::Gia_ManPiNum(new_gia), 
+                    pabc::Gia_ManPoNum(new_gia), 
+                    Gia_ManAndNum(new_gia), 
+                    pabc::Gia_ManLevelNum(new_gia));
 
                 store<pabc::Gia_Man_t *>().extend();
                 store<pabc::Gia_Man_t *>().current() = new_gia;
